@@ -80,7 +80,12 @@ class AdaptivePolicy(object):
         # to find the least utilized switch.
 
         # [REPLACE WITH YOUR CODE]
-        return self.utilization.keys()[0]
+        min_util_key = self.utilization.keys()[0]
+        for coreSw in self.utilization.keys():
+            value = self.utilization[coreSw]
+            if (value < self.utilization[min_util_key]):
+               min_util_key =  coreSw
+        return min_util_key        
 
     def redistribute(self):
         # we're installing flows by destination, so sort by received
